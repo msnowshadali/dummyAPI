@@ -14,9 +14,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
   <script>
 function myFunction() {
   const newTitle = document.querySelector("#inputTitle").value;
-  const e = {detail: { title: newTitle }};
 
-  parent.postMessage(e, "*")
+  const e = new CustomEvent("update-title-event", {
+            bubbles: true,
+            detail: { title: newTitle }
+          });
+          window.parent.dispatchEvent(e);
   console.log("triggered event", e);
 }
 </script>
