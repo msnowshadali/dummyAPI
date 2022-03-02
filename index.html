@@ -13,11 +13,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
   
   <script>
 function myFunction() {
-  const e = new CustomEvent("update-title-event", {
-            bubbles: true,
-            detail: { title: "new title" }
-          });
-          window.dispatchEvent(e);
+  const newTitle = document.querySelector("#inputTitle").value;
+  const e = {detail: { title: newTitle }};
+
+  parent.postMessage(e, "*")
   console.log("triggered event", e);
 }
 </script>
@@ -43,7 +42,8 @@ function myFunction() {
   
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-  <button onclick="myFunction()">Trigger Update Title</button>
+  <input type="text" id="inputTitle" />
+  <button onclick="myFunction()"> Update Title from iFrame</button>
 
   <!-- First Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
